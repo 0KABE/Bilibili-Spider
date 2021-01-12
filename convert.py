@@ -1,6 +1,9 @@
 from os import listdir
 from os.path import isfile, join
 
+from json_excel_converter import Converter
+from json_excel_converter.xlsx import Writer
+
 import json
 
 if __name__ == '__main__':
@@ -10,6 +13,6 @@ if __name__ == '__main__':
         with open('json/' + file, 'r') as f:
             data += json.load(f)
 
-    with open('output.json', 'w') as f:
-        json.dump(data, f)
-    print(onlyfiles)
+    conv = Converter()
+    conv.convert(data, Writer(file='output.xlsx'))
+    print('Convert to Xlsx success!')
